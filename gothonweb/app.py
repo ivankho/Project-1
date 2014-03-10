@@ -4,17 +4,17 @@ from gothonweb import map
 urls = (
   '/game', 'GameEngine',
   '/', 'Index',
-  "/count", "count",
-  "/reset", "reset"
+  "/start", "Start"
 )
 
 app = web.application(urls, globals())
+dict = {}
+cname = ""
 
 # little hack so that debug mode works with sessions
 if web.config.get('_session') is None:
     store = web.session.DiskStore('sessions')
     session = web.session.Session(app, store, initializer={'count': 10})
-	
     web.config._session = session
 else:
     session = web.config._session
@@ -25,21 +25,31 @@ render = web.template.render('templates/', base="layout")
 class Index(object):
     def GET(self):
         # this is used to "setup" the session with starting values
+        return render.firstpage()
+        name=form.action
+        web.seeother("/start")
+		
+class Start(object):
+    def GET(self):
+        # this is used to "setup" the session with starting values
         session.room = map.START
-        session.dict = [['Bob', 10]]
+        dict.update({cname : session.count})
         web.seeother("/game")
 
 
 class GameEngine(object):
 
     def GET(self):
-        if session.room:
-            return render.show_room(room=session.room, count=session.dict[0][1])
-        else:
+        if session.room and session.count >= 1:
+            return render.show_room(room=session.room, count=dict[cname])
+        elif (session.count >= 1):
             # why is there here? do you need it?
-            session.dict[0][1] = session.dict[0][1] - 1
-            print session.dict[0][1]
+            session.count -= 1
             return render.you_died()
+        else:
+			session.count = 10
+			return render.gameover()
+			
 
     def POST(self):
         form = web.input(action=None)
