@@ -1,16 +1,32 @@
-<h1>Welcome!</h1>
-<script>
-function msg()
-{
-alert("Your name has been recorded!");
-}
-</script>
-<p>Enter your name!</p>
-<p>
-<form name = "f1" action="/" method="POST">
-     <p><input type="text" name="action2"> <input type="SUBMIT" onclick="msg()"></p>
-</form>
-</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-<p><a href="/start">Play?</a></p>
-<p><a href="/score">High Scores</a></p>
+<center>
+	<div class="box">
+		<h1 style="color:green">
+			Welcome!
+		</h1>
+		<script>
+			function msg()
+			{
+			alert("Your name has been recorded!\n Press Play to begin!");}
+		</script>
+	
+		<p>
+			Enter your name!
+		</p>
+		<p>
+			<form name = "f1" action="/" method="POST" onsubmit="msg()">
+		     	<p>
+	    	 		<input type="text" name="action2">
+	     			<input type="SUBMIT" value="Submit">
+		     	</p>
+			</form>
+		</p>
+		<p style="text-align:left"><a href="/start">Play</a></p>
+		<p style="text-align:left"><a href="/score">High Scores</a></p>
+	</div>
+</center>

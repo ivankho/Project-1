@@ -119,8 +119,8 @@ escape_pod.add_paths({
 generic_death = Room("death", "You died.")
 
 the_bridge.add_paths({
-    'throw the bomb\n': generic_death,
-    'slowly place the bomb\n': escape_pod
+    'throw the bomb': generic_death,
+    'slowly place the bomb': escape_pod
 })
 
 laser_weapon_armory.add_paths({

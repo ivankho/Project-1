@@ -1,5 +1,6 @@
 import web
 from gothonweb import map
+from pandas import *
 
 urls = (
   '/game', 'GameEngine',
@@ -51,7 +52,9 @@ class Score(object):
     def GET(self):
         str1 = ""
         for key in dict.keys():
-            str1 = str1 + key + " :" + str(dict[key]) + '\t'
+            #My attempt to construct a dataframe so as to display the scores in a list
+            #str1 = DataFrame(data=int(dict[key]), index=key)
+            str1 += key + " : " + str(dict[key]) + '\t'
         if str1 == "":
             str1="No values to display!"
         return render.scores(s=str1)

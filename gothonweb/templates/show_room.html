@@ -1,26 +1,39 @@
 $def with (room, count, n)
 
-<h1> $room.name </h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="border_content">
+	<center>
+			<h1> 
+				$room.name 
+			</h1>
 
-<pre>
-$room.description
-</pre>
-
-<script>
-function msg()
-{
-alert("$room.path2");
-}
-</script>
+		<pre>
+		$room.description
+		</pre>
+	
+	<script id='help'>
+		function msg()
+		{
+		alert("$room.path2");
+		}
+	</script>
 
 $if room.name == "death":
-    <p><a href="/start">Play Again?</a></p>
+    	<p>
+	    <a href="/start">Play Again?</a>
+    	</p>
 $else:
-    <p>
-    <form action="/game" method="POST">
-        - <input type="text" name="action"> <input type="SUBMIT">
-		<input type="button" value="Help" onclick="msg()">
-    </form>
-    </p>
+	    <p>
+    	<form action="/game" method="POST">
+        	<span style="color:white">></span> <input type="text" name="action"> <input type="SUBMIT">
+			<input type="button" value="Help" onclick="msg()">
+    	</form>
+	    </p>
 	
-<h5> $n, you have $count lives left <h5>
+		<h5 style="text-family: Courier;"> $n, you have $count lives left <h5>
+	</center>
+</div>
