@@ -1,4 +1,4 @@
-$def with (room, count)
+$def with (room, count, n)
 
 <h1> $room.name </h1>
 
@@ -14,7 +14,7 @@ alert("$room.path2");
 </script>
 
 $if room.name == "death":
-    <p><a href="/">Play Again?</a></p>
+    <p><a href="/start">Play Again?</a></p>
 $else:
     <p>
     <form action="/game" method="POST">
@@ -23,4 +23,4 @@ $else:
     </form>
     </p>
 	
-<h5> Number of lives left: $count <h5>
+<h5> $n, you have $count lives left <h5>

@@ -26,22 +26,32 @@ class Index(object):
     def GET(self):
         # this is used to "setup" the session with starting values
         return render.firstpage()
-        name=form.action
-        web.seeother("/start")
+		
+    def POST(self):
+        f1 = web.input(action2="No Name")
+        cname=f1.action2
+        dict.update({cname : session.count})
+        web.seeother("/")
+		
 		
 class Start(object):
     def GET(self):
         # this is used to "setup" the session with starting values
         session.room = map.START
-        dict.update({cname : session.count})
+        print dict.keys()
+        dict.update({dict.keys()[-1] : session.count})
         web.seeother("/game")
 
 
 class GameEngine(object):
 
     def GET(self):
+        print dict.keys()
         if session.room and session.count >= 1:
-            return render.show_room(room=session.room, count=dict[cname])
+            if session.room.name == "death":
+                session.count -= 1
+                dict.update({dict.keys()[-1] : session.count})
+            return render.show_room(room=session.room, count=dict[dict.keys()[-1]], n=dict.keys()[-1])
         elif (session.count >= 1):
             # why is there here? do you need it?
             session.count -= 1
