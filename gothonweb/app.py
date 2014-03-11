@@ -9,7 +9,7 @@ urls = (
 
 app = web.application(urls, globals())
 dict = {}
-cname = ""
+global cname
 
 # little hack so that debug mode works with sessions
 if web.config.get('_session') is None:
@@ -28,7 +28,9 @@ class Index(object):
         return render.firstpage()
 		
     def POST(self):
+        global cname
         f1 = web.input(action2="No Name")
+        session.count = 10
         cname=f1.action2
         dict.update({cname : session.count})
         web.seeother("/")
@@ -36,28 +38,30 @@ class Index(object):
 		
 class Start(object):
     def GET(self):
+        global cname
         # this is used to "setup" the session with starting values
         session.room = map.START
         print dict.keys()
-        dict.update({dict.keys()[-1] : session.count})
+        dict.update({cname : session.count})
+        print dict.values()
         web.seeother("/game")
 
 
 class GameEngine(object):
 
     def GET(self):
+        global cname
         print dict.keys()
         if session.room and session.count >= 1:
             if session.room.name == "death":
                 session.count -= 1
                 dict.update({dict.keys()[-1] : session.count})
-            return render.show_room(room=session.room, count=dict[dict.keys()[-1]], n=dict.keys()[-1])
+            return render.show_room(room=session.room, count=dict[cname], n=cname)
         elif (session.count >= 1):
             # why is there here? do you need it?
             session.count -= 1
             return render.you_died()
         else:
-			session.count = 10
 			return render.gameover()
 			
 
