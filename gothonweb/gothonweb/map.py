@@ -4,12 +4,21 @@ class Room(object):
         self.name = name
         self.description = description
         self.paths = {}
+        self.path2 = ""
 
     def go(self, direction):
         return self.paths.get(direction, None)
 
     def add_paths(self, paths):
         self.paths.update(paths)
+        self.get_path();
+	
+		
+    def get_path(self):
+		s = ""
+		for path in self.paths.keys():
+			s = s + "    " + path
+		self.path2 = s
 		
 		
 central_corridor = Room("Central Corridor",
@@ -110,8 +119,8 @@ escape_pod.add_paths({
 generic_death = Room("death", "You died.")
 
 the_bridge.add_paths({
-    'throw the bomb': generic_death,
-    'slowly place the bomb': escape_pod
+    'throw the bomb\n': generic_death,
+    'slowly place the bomb\n': escape_pod
 })
 
 laser_weapon_armory.add_paths({
