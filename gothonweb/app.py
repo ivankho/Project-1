@@ -4,6 +4,7 @@ from gothonweb import map
 urls = (
   '/game', 'GameEngine',
   '/', 'Index',
+  '/score', 'Score',
   "/start", "Start"
 )
 
@@ -14,7 +15,7 @@ global cname
 # little hack so that debug mode works with sessions
 if web.config.get('_session') is None:
     store = web.session.DiskStore('sessions')
-    session = web.session.Session(app, store, initializer={'count': 10})
+    session = web.session.Session(app, store, initializer={'count': 2})
     web.config._session = session
 else:
     session = web.config._session
@@ -30,7 +31,7 @@ class Index(object):
     def POST(self):
         global cname
         f1 = web.input(action2="No Name")
-        session.count = 10
+        session.count = 2
         cname=f1.action2
         dict.update({cname : session.count})
         web.seeother("/")
@@ -45,6 +46,15 @@ class Start(object):
         dict.update({cname : session.count})
         print dict.values()
         web.seeother("/game")
+		
+class Score(object):
+    def GET(self):
+        str1 = ""
+        for key in dict.keys():
+            str1 = str1 + key + " :" + str(dict[key]) + '\t'
+        if str1 == "":
+            str1="No values to display!"
+        return render.scores(s=str1)
 
 
 class GameEngine(object):
