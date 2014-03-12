@@ -1,4 +1,4 @@
-$def with (room, count, n)
+$def with (room, count, n, win)
 
 <br>
 <br>
@@ -26,10 +26,19 @@ $if room.name == "death":
     	<p>
 	    <a href="/start">Play Again?</a>
     	</p>
+$elif room.name == "The End":
+            <p>
+            <form action="/game" method="POST">
+                <span style="color:white"></span>
+            </form>
+            <a href="/start">Play Again?</a>
+            </p>
+        $if win == False:
+            <h5 style="text-family: Courier;"> $n, you have $count lives left <h5>
 $else:
 	    <p>
     	<form action="/game" method="POST">
-        	<span style="color:white">></span> <input type="text" name="action"> <input type="SUBMIT">
+        	<span style="color:white"></span> <input type="text" name="action"> <input type="SUBMIT">
 			<input type="button" value="Help" onclick="msg()">
     	</form>
 	    </p>

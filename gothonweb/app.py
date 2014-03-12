@@ -61,15 +61,18 @@ class Score(object):
 
 
 class GameEngine(object):
-
+     
     def GET(self):
         global cname
         print dict.keys()
         if session.room and session.count >= 1:
-            if session.room.name == "death":
+            won = False
+            if session.room.description == map.the_end_winner.description:
+                won = True
+            if session.room.name == "death" or (session.room.name == "The End" and won == False):
                 session.count -= 1
                 dict.update({dict.keys()[-1] : session.count})
-            return render.show_room(room=session.room, count=dict[cname], n=cname)
+            return render.show_room(room=session.room, count=dict[cname], n=cname, win=won)
         elif (session.count >= 1):
             # why is there here? do you need it?
             session.count -= 1
