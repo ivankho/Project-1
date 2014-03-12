@@ -69,6 +69,8 @@ class GameEngine(object):
             won = False
             if session.room.description == map.the_end_winner.description:
                 won = True
+                session.count = 2
+                dict.update({dict.keys()[-1] : session.count})
             if session.room.name == "death" or (session.room.name == "The End" and won == False):
                 session.count -= 1
                 dict.update({dict.keys()[-1] : session.count})
