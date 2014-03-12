@@ -123,7 +123,7 @@ the_bridge.add_paths({
 })
 
 laser_weapon_armory.add_paths({
-    '0132': the_bridge,
+    '132': the_bridge,
     '*': generic_death
 })
 
