@@ -111,8 +111,11 @@ into jam jelly.
 )
 
 escape_pod.add_paths({
+    '1': the_end_loser,
     '2': the_end_winner,
-    '*': the_end_loser
+    '3': the_end_loser,
+    '4': the_end_loser,
+    '5': the_end_loser
 })
 
 generic_death = Room("death", "You died.")
