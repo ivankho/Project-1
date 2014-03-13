@@ -1,11 +1,28 @@
 $def with (s)
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
 <center>
 	<h1>High Scores</h1>
 
-	<p> $s </p>
+<div style="visibility:hidden">	
+	<p> $s</p>
+</div>
 
-
-	<p>
-		<a href="/">Back</a>
-		</p>
+$if s == "no":
+	<p> No values to Display! </p>
+$else:
+	$for stuff in s:
+		<ul>
+			<li> $stuff[0] : $stuff[1] </li>
+		</ul>
+	
+	
+<p>
+	<a href="/">Back</a>
+</p>
 </center>
