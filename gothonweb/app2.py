@@ -32,10 +32,10 @@ class Index(object):
 		
     def POST(self):
         global cname
-        f1 = web.input(action2="No Name")
+        f1 = web.input(value="")
         session.count = 2
-        cname=f1.action2
-        list.append((cname, session.count))
+        cname=f1.value
+        lst.append([cname, session.count])
         web.seeother("/")
 		
 		
@@ -45,18 +45,19 @@ class Start(object):
         # this is used to "setup" the session with starting values
         session.room = map.START
         print key
-        lst.append((cname, session.count))
+        lst.append([cname, session.count])
         print [player[1] for player in lst]
         web.seeother("/game")
 		
 class Score(object):
     def GET(self):
-		str1 = ""
-		for i, name in enumerate(key):
-			str1 += name + " : " + str(lst[i][1])
-		if str1 == "":
-			str1 = "no values to display"
-		return render.scores(s=str1)
+		try:
+			file = open('scores.json', 'r')
+			loaded = json.load(file)
+			file.close()
+		except IOError:
+			loaded = "no"
+		return render.scores(loaded)
 
 
 
@@ -69,21 +70,18 @@ class GameEngine(object):
             won = False
             if session.room.description == map.the_end_winner.description:
                 won = True
-                lst.append((key[-1], session.count))
+                lst.append([cname, session.count])
                 file = open("scores.json", "w")
                 json.dump(lst, file, sort_keys = True, indent = 4)
                 file.close()
             if session.room.name == "death" or (session.room.name == "The End" and won == False):
-                session.count -= 1
-            return render.show_room(room=session.room, count=lst[cname], n=cname, win=won)
+				session.count -= 1     
+            return render.show_room(room=session.room, count=session.count, n=cname, win=won)
         elif (session.count >= 1):
             # why is there here? do you need it?
             session.count -= 1
             return render.you_died()
         else:
-			file = open("scores.json", "w")
-			json.dump(lst, file, sort_keys = True, indent = 4)
-			file.close()
 			return render.gameover()
 			
 
