@@ -35,8 +35,6 @@ class Index(object):
         f1 = web.input(value="")
         session.count = 2
         cname=f1.value
-        lst.append([cname, session.count])
-        print lst
         web.seeother("/")
 		
 		
@@ -45,10 +43,9 @@ class Start(object):
         global cname
         # this is used to "setup" the session with starting values
         session.room = map.START
-        lst.append([cname, session.count])
         key=[player[0] for player in lst]
-        print [player[1] for player in lst]
-        print key
+        #print [player[1] for player in lst] <--Dont really need right? -Tony, Yvonne
+        #print key
         web.seeother("/game")
 		
 class Score(object):
@@ -89,7 +86,6 @@ class GameEngine(object):
 
     def POST(self):
         form = web.input(action=None)
-
         # there is a bug here, can you fix it?
         if session.room and form.action:
             session.room = session.room.go(form.action)
