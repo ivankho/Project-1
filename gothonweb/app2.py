@@ -11,7 +11,12 @@ urls = (
 )
 
 app = web.application(urls, globals())
+theFile = open('scores.json', 'r')
+loading = json.load(theFile)
+theFile.close()
 lst = []
+for item in loading:
+	lst.append(item)
 key = []
 cname = "No Name"
 global otherGame
