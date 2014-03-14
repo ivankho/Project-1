@@ -29,13 +29,15 @@ render = web.template.render('templates/', base="layout")
 
 class Index(object):
     def GET(self):
+        global cname
+        cname="No name"
+        session.count = 2
         # this is used to "setup" the session with starting values
         return render.firstpage()
 		
     def POST(self):
         global cname
         f1 = web.input(value="")
-        session.count = 2
         cname=f1.value
         #lst.append([cname, session.count])
         print lst
