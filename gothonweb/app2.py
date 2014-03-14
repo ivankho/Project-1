@@ -35,11 +35,8 @@ class Index(object):
         f1 = web.input(value="")
         session.count = 2
         cname=f1.value
-<<<<<<< HEAD
-=======
         #lst.append([cname, session.count])
         print lst
->>>>>>> 5031efacf0a05c84cc155ed9c74cd19ca1d5cc2e
         web.seeother("/")
 		
 		
@@ -48,10 +45,7 @@ class Start(object):
         global cname
         # this is used to "setup" the session with starting values
         session.room = map.START
-<<<<<<< HEAD
-=======
         #lst.append([cname, session.count])
->>>>>>> 5031efacf0a05c84cc155ed9c74cd19ca1d5cc2e
         key=[player[0] for player in lst]
         #print [player[1] for player in lst] <--Dont really need right? -Tony, Yvonne
         #print key
