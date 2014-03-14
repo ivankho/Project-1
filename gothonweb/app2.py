@@ -13,7 +13,7 @@ urls = (
 app = web.application(urls, globals())
 lst = []
 key = []
-global cname
+cname = "No Name"
 global otherGame
 
 # little hack so that debug mode works with sessions
@@ -29,8 +29,6 @@ render = web.template.render('templates/', base="layout")
 
 class Index(object):
     def GET(self):
-        global cname
-        cname="No name"
         session.count = 2
         # this is used to "setup" the session with starting values
         return render.firstpage()
