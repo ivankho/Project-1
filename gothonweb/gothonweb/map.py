@@ -137,3 +137,10 @@ central_corridor.add_paths({
 })
 
 START = central_corridor
+
+the_other_start = Room("The Other Start",
+"""
+Here is the wonderful game 2.
+""")
+
+START2= the_other_start

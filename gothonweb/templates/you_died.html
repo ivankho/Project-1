@@ -1,3 +1,4 @@
+$def with (other)
 <br>
 <br>
 <br>
@@ -10,7 +11,10 @@
 
 		<p>Looks like you bit the dust.</p>
 	
-		<p>
+        <p>
+		$if other:
+		    <a href="/start2">Play Again</a>
+		$else:
 			<a href="/start">Play Again</a>
 		</p>
 	</center>

@@ -6,13 +6,15 @@ urls = (
   '/game', 'GameEngine',
   '/', 'Index',
   '/score', 'Score',
-  "/start", "Start"
+  "/start", "Start",
+  "/start2", "Start2"
 )
 
 app = web.application(urls, globals())
 lst = []
 key = []
 global cname
+global otherGame
 
 # little hack so that debug mode works with sessions
 if web.config.get('_session') is None:
@@ -43,8 +45,23 @@ class Index(object):
 class Start(object):
     def GET(self):
         global cname
+        global otherGame
+        otherGame = False
         # this is used to "setup" the session with starting values
         session.room = map.START
+        #lst.append([cname, session.count])
+        key=[player[0] for player in lst]
+        #print [player[1] for player in lst] <--Dont really need right? -Tony, Yvonne
+        #print key
+        web.seeother("/game")
+		
+class Start2(object):
+    def GET(self):
+        global cname
+        global otherGame
+        otherGame = True
+        # this is used to "setup" the session with starting values
+        session.room = map.START2
         #lst.append([cname, session.count])
         key=[player[0] for player in lst]
         #print [player[1] for player in lst] <--Dont really need right? -Tony, Yvonne
@@ -67,6 +84,7 @@ class GameEngine(object):
      
     def GET(self):
         global cname
+        global otherGame
         print key
         if session.room and session.count >= 1:
             won = False
@@ -82,7 +100,7 @@ class GameEngine(object):
         elif (session.count >= 1):
             # why is there here? do you need it?
             session.count -= 1
-            return render.you_died()
+            return render.you_died(otherGame)
         else:
 			lst.append([cname, session.count])
 			file = open("scores.json", "w")
