@@ -11,7 +11,7 @@ urls = (
 
 app = web.application(urls, globals())
 lst = []
-key = [player[0] for player in lst]
+key = []
 global cname
 
 # little hack so that debug mode works with sessions
@@ -36,6 +36,7 @@ class Index(object):
         session.count = 2
         cname=f1.value
         lst.append([cname, session.count])
+        print lst
         web.seeother("/")
 		
 		
@@ -44,9 +45,10 @@ class Start(object):
         global cname
         # this is used to "setup" the session with starting values
         session.room = map.START
-        print key
         lst.append([cname, session.count])
+        key=[player[0] for player in lst]
         print [player[1] for player in lst]
+        print key
         web.seeother("/game")
 		
 class Score(object):
