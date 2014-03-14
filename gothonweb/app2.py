@@ -35,7 +35,7 @@ class Index(object):
         f1 = web.input(value="")
         session.count = 2
         cname=f1.value
-        lst.append([cname, session.count])
+        #lst.append([cname, session.count])
         print lst
         web.seeother("/")
 		
@@ -45,7 +45,7 @@ class Start(object):
         global cname
         # this is used to "setup" the session with starting values
         session.room = map.START
-        lst.append([cname, session.count])
+        #lst.append([cname, session.count])
         key=[player[0] for player in lst]
         print [player[1] for player in lst]
         print key
@@ -84,6 +84,10 @@ class GameEngine(object):
             session.count -= 1
             return render.you_died()
         else:
+			lst.append([cname, session.count])
+			file = open("scores.json", "w")
+			json.dump(lst, file, sort_keys = True, indent = 4)
+			file.close()
 			return render.gameover()
 			
 
