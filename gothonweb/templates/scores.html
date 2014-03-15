@@ -1,4 +1,4 @@
-$def with (s)
+$def with (s, s2)
 
 <br>
 <br>
@@ -11,14 +11,40 @@ $def with (s)
 
 <div style="visibility:hidden">	
 	<p> $s</p>
+	<p> $s2</p>
 </div>
 
-$if s == "no":
+$if s == "no" and s2 == "no":
 	<p> No values to Display! </p>
+
+$elif s=="no" and s2 != "no":
+	$for stuff in s:
+		<ul>
+			<li> None </li>
+		</ul>
+	$for stuff in s2:
+		<ul>
+			<li>$stuff[0] : $stuff[1] </li>
+		</ul>
+
+$elif s != "no" and s2 == "no":
+	$for stuff in s:
+		<ul>
+			<li> $stuff[0] : $stuff[1] </li>
+		</ul>
+	$for stuff in s2:
+		<ul>
+			<li> None </li>
+		</ul>
+
 $else:
 	$for stuff in s:
 		<ul>
 			<li> $stuff[0] : $stuff[1] </li>
+		</ul>
+	$for stuff in s2:
+		<ul>
+			<li>$stuff[0] : $stuff[1] </li>
 		</ul>
 	
 	<p><a href="/clear"> Clear Score</a></p>
