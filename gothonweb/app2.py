@@ -3,6 +3,8 @@ from gothonweb import map
 import json
 import os
 
+#delete this
+
 urls = (
   '/game', 'GameEngine',
   '/', 'Index',
@@ -27,7 +29,6 @@ else:
     session = web.config._session
 
 render = web.template.render('templates/', base="layout")
-
 
 class Index(object):
     def GET(self):
