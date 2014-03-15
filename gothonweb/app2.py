@@ -3,8 +3,6 @@ from gothonweb import map
 import json
 import os
 
-#delete this
-
 urls = (
   '/game', 'GameEngine',
   '/', 'Index',
@@ -17,8 +15,10 @@ urls = (
 app = web.application(urls, globals())
 lst = []
 key = []
+lst2 = []
+key2 = []
 cname = "No Name"
-global otherGame
+otherGame = False
 
 # little hack so that debug mode works with sessions
 if web.config.get('_session') is None:
@@ -33,15 +33,12 @@ render = web.template.render('templates/', base="layout")
 class Index(object):
     def GET(self):
         session.count = 2
-        # this is used to "setup" the session with starting values
         return render.firstpage()
 		
     def POST(self):
         global cname
         f1 = web.input(value="")
         cname=f1.value
-        #lst.append([cname, session.count])
-        print lst
         web.seeother("/")
 		
 		
@@ -50,12 +47,9 @@ class Start(object):
         global cname
         global otherGame
         otherGame = False
-        # this is used to "setup" the session with starting values
         session.room = map.START
-        #lst.append([cname, session.count])
         key=[player[0] for player in lst]
-        #print [player[1] for player in lst] <--Dont really need right? -Tony, Yvonne
-        #print key
+        key2=[player[0] for player in lst2]
         web.seeother("/game")
 		
 class Start2(object):
@@ -63,36 +57,47 @@ class Start2(object):
         global cname
         global otherGame
         otherGame = True
-        # this is used to "setup" the session with starting values
         session.room = map.START2
-        #lst.append([cname, session.count])
         key=[player[0] for player in lst]
-        #print [player[1] for player in lst] <--Dont really need right? -Tony, Yvonne
-        #print key
+        key2=[player[0] for player in lst2]
         web.seeother("/game")
 		
 class Score(object):
     def GET(self):
-		try:
-			file = open('scores.json', 'r')
-			loaded = json.load(file)
-			file.close()
-		except IOError:
-			loaded = "no"
-		return render.scores(loaded)
+        global otherGame
+        loaded="no"
+        loaded2="no"
+        try:
+            if otherGame:
+			    file2 = open('scores2.json', 'r')
+			    loaded = json.load(file2)
+			    file2.close()
+        except IOError:
+                loaded2 = "no"
+        try:
+			if not otherGame:
+			    file = open('scores.json', 'r')
+			    loaded = json.load(file)
+			    file.close()
+        except IOError:
+                loaded = "no"
+        print loaded, loaded2
+        return render.scores(loaded, loaded2)
+
 
 class Clear(object):
-	def GET(self):
-		os.remove("scores.json")
-		del lst[:]
-		web.seeother("/score")
+    def GET(self):
+        os.remove("scores.json")
+        del lst[:]
+        os.remove("scores2.json")
+        del lst2[:]
+        web.seeother("/score")
 
 class GameEngine(object):
      
     def GET(self):
         global cname
         global otherGame
-        print key
         if session.room and session.count >= 1:
             won = False
             if session.room.description == map.the_end_winner.description:
@@ -105,20 +110,24 @@ class GameEngine(object):
 				session.count -= 1     
             return render.show_room(room=session.room, count=session.count, n=cname, win=won)
         elif (session.count >= 1):
-            # why is there here? do you need it?
             session.count -= 1
             return render.you_died(otherGame)
         else:
-			lst.append([cname, session.count])
-			file = open("scores.json", "a")
-			json.dump(lst, file, sort_keys = True, indent = 4)
-			file.close()
-			return render.gameover()
+            if otherGame:
+                lst2.append([cname, session.count])
+                file2 = open("scores2.json", "w")
+                json.dump(lst2, file2, sort_keys = True, indent = 4)
+                file2.close()
+            else:
+                lst.append([cname, session.count])
+                file = open("scores.json", "w")
+                json.dump(lst, file, sort_keys = True, indent = 4)
+                file.close()
+            return render.gameover()
 			
 
     def POST(self):
         form = web.input(action=None)
-        # there is a bug here, can you fix it?
         if session.room and form.action:
             session.room = session.room.go(form.action)
 
