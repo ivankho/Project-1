@@ -138,9 +138,105 @@ central_corridor.add_paths({
 
 START = central_corridor
 
-the_other_start = Room("The Other Start",
-"""
-Here is the wonderful game 2.
-""")
 
-START2= the_other_start
+
+the_entrance = Room("Entrance of the Maze",
+"""
+You are Theseus, the son of King Aegeus, and you have 
+been sent on a mission to kill the minotaur, a son of 
+King Minos who lives in a maze. If you succeed, glory 
+will befall upon you. If you fail, you will become 
+another tribute to the hungry minotaur who has eaten 
+thousands of befallen heroes in the past. You 
+approach the entrance of the maze along with the King 
+Minos and Princess Ariadne. They give you a map, and 
+they offer you a ball of thread to keep track of your 
+way through the maze. Will you take the thread?
+"""
+)
+
+the_beam = Room("To Beam or Not to Beam",
+"""
+Now you are a little bit in the maze, but you can 
+still see the entrance and the light of day behind 
+you. You see multiple passages in front of you. In 
+front of these passages, there is a huge beam that 
+doesn’t look very sturdy. Before you proceed further, 
+what do you decide to do with the beam in front of you? 
+"""
+)
+
+the_fight = Room("The Setup",
+"""
+You are now in the maze. You go further and further 
+inside and soon you are enveloped in complete darkness. 
+You feel your way along the walls and around the twists 
+and turns of the labyrinth. Somewhere deep inside, the 
+bull was stamping and snorting, impatient to meet its 
+latest sacrifice. At last, deep within, you could hear 
+that the Minotaur is close by. You find a passageway 
+that leads to a dead end, but discover a sudden turning 
+just before the end. You have seen this passage on the 
+map and realize it was just the place you are looking 
+for. How do you decide to approach the Minotaur in the 
+corridor?
+"""
+)
+
+entrance_death = Room("Oh no! You have failed.", 
+"""
+You have failed to properly use the thread that 
+would have allowed you to keep track of your way 
+through the maze and come back safely whether 
+you succeed or fail. You entered the maze and 
+became enveloped in darkness. You end up wandering 
+the maze forever, either dying from thirst and 
+hunger or getting eaten by the minotaur.
+"""
+)
+
+fight_death = Room("Oh no! You died.",
+"""
+Heading straight for the minotaur was not a good idea. 
+You underestimated his strength and his agility. He 
+quickly lifts you up and stuffs you in his mouth as a 
+tasty treat. You now suffer the same fate as all the 
+others who have gone into the maze. You are dead.
+"""
+)
+
+fight_win = Room("You win! You have become the new glorious hero of Crete!", 
+"""
+You hide yourself around this final twist and call out 
+to the Minotaur. It hears you and comes charging down 
+the passage, but it could not slow down before the 
+turning and charged straight into the wall. While it 
+is still stunned from the impact you thrust your spear 
+into the beast’s neck and kill it, though it does not 
+give up its life before letting out a terrible bellow.
+
+You now use your thread to go back to the entrance. 
+King Minos, your father, and Princess are in shock 
+that you made it out alive. The princess admires you 
+greatly and falls in love with you. You propose to her 
+and she agrees. You two live happily ever after.
+"""
+)
+
+the_entrance.add_paths({
+    'take it': the_beam,
+    "don't take it": entrance_death
+})
+
+the_beam.add_paths({
+    'tie the thread to the beam': the_fight,
+    'ignore and proceed with caution': entrance_death
+})
+
+the_fight.add_paths({
+    'rush towards him': fight_death,
+    'slowly approach the minotaur': fight_death,
+    'hide yourself around the twist and call out to him': fight_win
+})
+
+START2 = entrance_start
