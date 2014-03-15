@@ -1,22 +1,19 @@
 import web
 from gothonweb import map
 import json
+import os
 
 urls = (
   '/game', 'GameEngine',
   '/', 'Index',
   '/score', 'Score',
   "/start", "Start",
-  "/start2", "Start2"
+  "/start2", "Start2",
+  "/clear", "Clear"
 )
 
 app = web.application(urls, globals())
-theFile = open('scores.json', 'r')
-loading = json.load(theFile)
-theFile.close()
 lst = []
-for item in loading:
-	lst.append(item)
 key = []
 cname = "No Name"
 global otherGame
@@ -83,7 +80,11 @@ class Score(object):
 			loaded = "no"
 		return render.scores(loaded)
 
-
+class Clear(object):
+	def GET(self):
+		os.remove("scores.json")
+		del lst[:]
+		web.seeother("/score")
 
 class GameEngine(object):
      
@@ -96,7 +97,7 @@ class GameEngine(object):
             if session.room.description == map.the_end_winner.description:
                 won = True
                 lst.append([cname, session.count])
-                file = open("scores.json", "w")
+                file = open("scores.json", "a")
                 json.dump(lst, file, sort_keys = True, indent = 4)
                 file.close()
             if session.room.name == "death" or (session.room.name == "The End" and won == False):
@@ -108,7 +109,7 @@ class GameEngine(object):
             return render.you_died(otherGame)
         else:
 			lst.append([cname, session.count])
-			file = open("scores.json", "w")
+			file = open("scores.json", "a")
 			json.dump(lst, file, sort_keys = True, indent = 4)
 			file.close()
 			return render.gameover()
