@@ -14,9 +14,7 @@ urls = (
 
 app = web.application(urls, globals())
 lst = []
-key = []
 lst2 = []
-key2 = []
 cname = "No Name"
 otherGame = False
 
@@ -44,22 +42,16 @@ class Index(object):
 		
 class Start(object):
     def GET(self):
-        global cname
         global otherGame
         otherGame = False
         session.room = map.START
-        key=[player[0] for player in lst]
-        key2=[player[0] for player in lst2]
         web.seeother("/game")
 		
 class Start2(object):
     def GET(self):
-        global cname
         global otherGame
         otherGame = True
         session.room = map.START2
-        key=[player[0] for player in lst]
-        key2=[player[0] for player in lst2]
         web.seeother("/game")
 		
 class Score(object):
@@ -70,7 +62,7 @@ class Score(object):
         try:
             if otherGame:
 			    file2 = open('scores2.json', 'r')
-			    loaded = json.load(file2)
+			    loaded2 = json.load(file2)
 			    file2.close()
         except IOError:
                 loaded2 = "no"
@@ -81,7 +73,6 @@ class Score(object):
 			    file.close()
         except IOError:
                 loaded = "no"
-        print loaded, loaded2
         return render.scores(loaded, loaded2)
 
 
@@ -108,6 +99,12 @@ class GameEngine(object):
                 file = open("scores.json", "a")
                 json.dump(lst, file, sort_keys = True, indent = 4)
                 file.close()
+            elif session.room.description == map.fight_win.description:
+                won = True
+                lst2.append([cname, session.count])
+                file2 = open("scores2.json", "a")
+                json.dump(lst22, file2, sort_keys = True, indent = 4)
+                file2.close()
             if session.room.name == "death" or session.room.name == "Oh no! You have failed."\
             or session.room.name == "Oh no! You died." or (session.room.name == "The End" and won == False):
 				session.count -= 1     
