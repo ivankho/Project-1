@@ -55,25 +55,21 @@ class Start2(object):
         web.seeother("/game")
 		
 class Score(object):
-    def GET(self):
-        global otherGame
-        loaded="no"
-        loaded2="no"
-        try:
-            if otherGame:
-			    file2 = open('scores2.json', 'r')
-			    loaded2 = json.load(file2)
-			    file2.close()
-        except IOError:
-                loaded2 = "no"
-        try:
-			if not otherGame:
-			    file = open('scores.json', 'r')
-			    loaded = json.load(file)
-			    file.close()
-        except IOError:
-                loaded = "no"
-        return render.scores(loaded, loaded2)
+	def GET(self):
+		global otherGame
+		try:
+			file2 = open('scores2.json', 'r')
+			loaded2 = json.load(file2)
+			file2.close()
+		except IOError:
+				loaded2 = "no"
+		try:
+			file = open('scores.json', 'r')
+			loaded = json.load(file)
+			file.close()
+		except IOError:
+				loaded = "no"
+		return render.scores(loaded, loaded2)
 
 
 class Clear(object):
@@ -113,16 +109,6 @@ class GameEngine(object):
             session.count -= 1
             return render.you_died(otherGame)
         else:
-            if otherGame:
-                lst2.append([cname, session.count])
-                file2 = open("scores2.json", "w")
-                json.dump(lst2, file2, sort_keys = True, indent = 4)
-                file2.close()
-            else:
-                lst.append([cname, session.count])
-                file = open("scores.json", "w")
-                json.dump(lst, file, sort_keys = True, indent = 4)
-                file.close()
             return render.gameover()
 			
 
