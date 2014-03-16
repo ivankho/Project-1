@@ -14,6 +14,8 @@ $def with (content)
 			padding:10px;
 			border:5px solid blue;
 			margin:2px;
+			text-align:center;
+			margin: 0 auto;
 			}
 		body
 			{
@@ -37,6 +39,8 @@ $def with (content)
 			padding:10px;
 			border:5px dotted yellow;
 			margin:2px;
+			text-align:center;
+			margin: 0 auto;
 			}
 		h5
 			{
@@ -50,19 +54,54 @@ $def with (content)
 			{
 			list-style-type: None;
 			padding:0px;
-			margin:0px
-			width:50px
-			float:left
+			margin:0px;
+			text-align:center;
 			}
 		li
 			{
-			color:white
+			color:white;
+			}
+		h2
+			{
+			color:white;
+			}
+		h3
+			{
+			color:white;
+			text-align: center;
+			}
+		div.hs1
+			{
+			width:200px;
+			padding:10px;
+			border:5px dotted #1e90ff;
+			margin:2px;
+			text-align:center;
+			margin: 0 auto;
+			}
+		div.hs2
+			{
+			width:200px;
+			padding:10px;
+			border:5px dotted yellow;
+			margin:2px;
+			text-align:center;
+			margin: 0 auto;
+			}
+		.rainbow
+			{
+			background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+			background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+			color:transparent;
+			-webkit-background-clip: text;
+			background-clip: text;
 			}
 	</style>
 </head>
+
 <body>
 
-$:content
+	$:content
 
 </body>
 </html>
