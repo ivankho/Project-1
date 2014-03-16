@@ -86,14 +86,14 @@ class Score(object):
 
 
 class Clear(object):
-    def GET(self):
+	def GET(self):
 		if os.path.isfile("scores.json"):        
 			os.remove("scores.json")
 			del lst[:]
 		if os.path.isfile("scores2.json"):
 			os.remove("scores2.json")
 			del lst2[:]
-        web.seeother("/score")
+		web.seeother("/score")
 
 class GameEngine(object):
      
