@@ -96,13 +96,13 @@ class GameEngine(object):
             if session.room.description == map.the_end_winner.description:
                 won = True
                 lst.append([cname, session.count])
-                file = open("scores.json", "a")
+                file = open("scores.json", "w")
                 json.dump(lst, file, sort_keys = True, indent = 4)
                 file.close()
             elif session.room.description == map.fight_win.description:
                 won = True
                 lst2.append([cname, session.count])
-                file2 = open("scores2.json", "a")
+                file2 = open("scores2.json", "w")
                 json.dump(lst2, file2, sort_keys = True, indent = 4)
                 file2.close()
             if session.room.name == "death" or session.room.name == "Oh no! You have failed."\
