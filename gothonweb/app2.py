@@ -103,7 +103,7 @@ class GameEngine(object):
                 won = True
                 lst2.append([cname, session.count])
                 file2 = open("scores2.json", "a")
-                json.dump(lst22, file2, sort_keys = True, indent = 4)
+                json.dump(lst2, file2, sort_keys = True, indent = 4)
                 file2.close()
             if session.room.name == "death" or session.room.name == "Oh no! You have failed."\
             or session.room.name == "Oh no! You died." or (session.room.name == "The End" and won == False):
