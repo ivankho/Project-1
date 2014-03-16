@@ -22,11 +22,11 @@ $if s == "no" and s2 == "no":
 	</center>
 
 $elif s=="no" and s2 != "no":
-	<h3> Game 1 </h3>
+	<h3 style="color:#1e90ff;"> Aliens </h3>
 	<ul>
-		<li> No values for Game 1 </li>
+		<li> No values for Aliens </li>
 	</ul>
-	<h3> Game 2 </h3>
+	<h3 style="color:yellow"> Minotaur </h3>
 	$for stuff2 in s2:
 		<ul>
 			<li>$stuff2[0] : $stuff2[1] </li>
@@ -34,28 +34,28 @@ $elif s=="no" and s2 != "no":
 
 
 $elif s != "no" and s2 == "no":
-		<h3 style="color:#1e90ff;"> Game 1 </h3>
+		<h3 style="color:#1e90ff;"> Aliens </h3>
 		<div class="hs1">
 			$for stuff3 in s:
 				<ul>
 					<li> $stuff3[0] : $stuff3[1] </li>
 				</ul>
 		</div>
-	<h3 style="color:yellow"> Game 2 </h3>
+	<h3 style="color:yellow"> Minotaur </h3>
 	<div class="hs2">
 		<ul>
-			<li> No values for Game 2 </li>
+			<li> No values for Minotaur </li>
 		</ul>
 	</div>
 
 $else:
-	<h3> Game 1 </h3>
+	<h3 style="color:#1e90ff;"> Aliens </h3>
 	$for stuff in s:
 		<ul>
 			<li> $stuff[0] : $stuff[1] </li>
 		</ul>
 		
-	<h3> Game 2 </h3>
+	<h3 style="color:yellow"> Minotaur </h3>
 	$for stuff in s2:
 		<ul>
 			<li>$stuff[0] : $stuff[1] </li>
