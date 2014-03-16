@@ -21,7 +21,7 @@ otherGame = False
 # little hack so that debug mode works with sessions
 if web.config.get('_session') is None:
     store = web.session.DiskStore('sessions')
-    session = web.session.Session(app, store, initializer={'count': 2})
+    session = web.session.Session(app, store, initializer={'count': 10})
     web.config._session = session
 else:
     session = web.config._session
@@ -30,7 +30,7 @@ render = web.template.render('templates/', base="layout")
 
 class Index(object):
     def GET(self):
-        session.count = 2
+        session.count = 10
         return render.firstpage()
 		
     def POST(self):
