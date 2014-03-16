@@ -152,8 +152,7 @@ approach the entrance of the maze along with the King
 Minos and Princess Ariadne. They give you a map, and 
 they offer you a ball of thread to keep track of your 
 way through the maze. Will you take the thread?
-"""
-)
+""")
 
 the_beam = Room("To Beam or Not to Beam",
 """
@@ -161,10 +160,9 @@ Now you are a little bit in the maze, but you can
 still see the entrance and the light of day behind 
 you. You see multiple passages in front of you. In 
 front of these passages, there is a huge beam that 
-doesn’t look very sturdy. Before you proceed further, 
+doesn't look very sturdy. Before you proceed further, 
 what do you decide to do with the beam in front of you? 
-"""
-)
+""")
 
 the_fight = Room("The Setup",
 """
@@ -212,7 +210,7 @@ to the Minotaur. It hears you and comes charging down
 the passage, but it could not slow down before the 
 turning and charged straight into the wall. While it 
 is still stunned from the impact you thrust your spear 
-into the beast’s neck and kill it, though it does not 
+into the beast's neck and kill it, though it does not 
 give up its life before letting out a terrible bellow.
 
 You now use your thread to go back to the entrance. 
@@ -225,7 +223,7 @@ and she agrees. You two live happily ever after.
 
 the_entrance.add_paths({
     'take it': the_beam,
-    "don't take it": entrance_death
+    "refuse it": entrance_death
 })
 
 the_beam.add_paths({
@@ -239,4 +237,4 @@ the_fight.add_paths({
     'hide yourself around the twist and call out to him': fight_win
 })
 
-START2 = entrance_start
+START2 = the_entrance

@@ -26,7 +26,11 @@ $if room.name == "death":
     	<p>
 	    <a href="/start">Play Again?</a>
     	</p>
-$elif room.name == "The End":
+$elif room.name == "Oh no! You have failed." or room.name == "Oh no! You have died.":
+    	<p>
+	    <a href="/start2">Play Again?</a>
+    	</p>
+$elif room.name == "The End" or room.name == "You win! You have become the new glorious hero of Crete!" or room.name == "Oh no! You died.":
             <p>
             <form action="/game" method="POST">
                 <span style="color:white"></span>

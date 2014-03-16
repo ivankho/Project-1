@@ -106,7 +106,8 @@ class GameEngine(object):
                 file = open("scores.json", "a")
                 json.dump(lst, file, sort_keys = True, indent = 4)
                 file.close()
-            if session.room.name == "death" or (session.room.name == "The End" and won == False):
+            if session.room.name == "death" or session.room.name == "Oh no! You have failed."\
+            or session.room.name == "Oh no! You died." or (session.room.name == "The End" and won == False):
 				session.count -= 1     
             return render.show_room(room=session.room, count=session.count, n=cname, win=won)
         elif (session.count >= 1):
